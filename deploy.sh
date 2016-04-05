@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export CODE_PATH "/opt/code"
+export CODE_PATH="/opt/code"
 
 # Check Git Repository
 if [ ! -n "$1" ];
