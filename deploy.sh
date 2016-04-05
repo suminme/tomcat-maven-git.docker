@@ -27,7 +27,7 @@ cd $CODE_PATH && git pull origin master
 fi
 
 # Compile & Deploy code
-cd $CODE_PATH && mvn clean package -Dmaven.test.skip=true
+cd $CODE_PATH && $MAVEN_HOME/bin/mvn clean package -Dmaven.test.skip=true
 cp $CODE_PATH/target/*.war $CATALINA_HOME/webapps
 mv $CATALINA_HOME/webapps/*.war $CATALINA_HOME/webapps/ROOT.war
 
