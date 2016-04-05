@@ -26,11 +26,14 @@ else
 cd $CODE_PATH && git pull origin master
 fi
 
+# Clean tomcat
+rm -rf $CATALINA_HOME/temp/* && rm -rf $CATALINA_HOME/work/* && rm -rf $CATALINA_HOME/webapps/*
+
 # Compile & Deploy code
 cd $CODE_PATH && $MAVEN_HOME/bin/mvn clean package -Dmaven.test.skip=true
 cp $CODE_PATH/target/*.war $CATALINA_HOME/webapps
 mv $CATALINA_HOME/webapps/*.war $CATALINA_HOME/webapps/ROOT.war
 
-# Clean & Start tomcat
+# Start tomcat
 rm -rf $CATALINA_HOME/temp/* && rm -rf $CATALINA_HOME/work/* && rm -rf $CATALINA_HOME/webapps/*
 $CATALINA_HOME/bin/startup.sh && tail -f $CATALINA_HOME/logs/catalina.out
