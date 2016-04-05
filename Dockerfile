@@ -6,6 +6,7 @@ MAINTAINER SUMIN "dev@sumin.me"
 
 # ENV
 ENV ENV_PATH /opt/env
+RUN mkdir $ENV_PATH
 ENV PATH $PATH:$ENV_PATH/bin
 
 ENV JDK_URL http://download.oracle.com/otn-pub/java/jdk/8u65-b17/jdk-8u65-linux-x64.tar.gz
@@ -18,7 +19,7 @@ RUN apt-get -y install curl and git
 
 # Install JDK
 RUN cd /tmp && mkdir jdk && cd jdk &&  curl -L $JDK_URL -H 'Cookie: oraclelicense=accept-securebackup-cookie; gpw_e24=Dockerfile' | tar -xz
-RUN mkdir $ENV_PATH/jdk && mv /tmp/jdk/* $ENV_PATH/jdk
+RUN mv /tmp/jdk/* $ENV_PATH/jdk
 ENV JAVA_HOME $ENV_PATH/jdk
 
 # Install tomcat
