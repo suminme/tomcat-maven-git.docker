@@ -18,12 +18,12 @@ RUN apt-get -y install curl and git
 
 # Install JDK
 RUN cd /tmp && mkdir jdk && cd jdk &&  curl -L $JDK_URL -H 'Cookie: oraclelicense=accept-securebackup-cookie; gpw_e24=Dockerfile' | tar -xz
-RUN mv /tmp/jdk/* $ENV_PATH/jdk/
+RUN mv /tmp/jdk/* $ENV_PATH/jdk
 ENV JAVA_HOME $ENV_PATH/jdk
 
 # Install tomcat
 RUN cd /tmp && mkdir tomcat && cd tomcat &&  curl -L $TOMCAT_URL | tar -xz
-RUN mv /tmp/tomcat/* $ENV_PATH/tomcat/
+RUN mv /tmp/tomcat/* $ENV_PATH/tomcat
 ENV CATALINA_HOME $ENV_PATH/tomcat
 ENV PATH $PATH:$CATALINA_HOME/bin
 
