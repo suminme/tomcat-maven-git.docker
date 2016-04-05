@@ -1,5 +1,7 @@
 #!/bin/sh
 
+export CODE_PATH /opt/code
+
 # Check Git Repository
 if [ ! -n "$1" ];
 then
@@ -17,7 +19,6 @@ fi
 echo "JAVA_OPTS=\"$JAVA_OPTS\"" >> $CATALINA_HOME/bin/setenv.sh
 
 # Git clone or update
-export CODE_PATH /opt/code
 
 if [ ! -d $CODE_PATH ];
 then
