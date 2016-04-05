@@ -15,7 +15,7 @@ else
 export JAVA_OPTS=$2
 fi
 echo "JAVA_OPTS=\"$JAVA_OPTS\"" >> $CATALINA_HOME/bin/setenv.sh
-echo "-Used JAVA_OPTS:"+$JAVA_OPTS+"-"
+echo "-JAVA_OPTS:"$JAVA_OPTS"-"
 
 # Clean & Start tomcat
 rm -rf $CATALINA_HOME/temp/* && rm -rf $CATALINA_HOME/work/* && rm -rf $CATALINA_HOME/webapps/*
