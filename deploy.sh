@@ -19,7 +19,6 @@ fi
 echo "JAVA_OPTS=\"$JAVA_OPTS\"" >> $CATALINA_HOME/bin/setenv.sh
 
 # Git clone or update
-
 if [ ! -d $CODE_PATH ];
 then
 git clone $1 $CODE_PATH
@@ -27,10 +26,8 @@ else
 cd $CODE_PATH && git pull origin master
 fi
 
-# Compile code
+# Compile & Deploy code
 cd $CODE_PATH && mvn clean package -Dmaven.test.skip=true
-
-# Deploy code
 cp $CODE_PATH/target/*.war $CATALINA_HOME/webapps
 mv $CATALINA_HOME/webapps/*.war $CATALINA_HOME/webapps/ROOT.war
 
