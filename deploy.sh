@@ -17,4 +17,4 @@ fi
 echo "JAVA_OPTS=\"$JAVA_OPTS\"" >> $CATALINA_HOME/bin/setenv.sh
 
 # Start tomcat
-startup.sh && tail -f $CATALINA_HOME/logs/catalina.out
+$CATALINA_HOME/startup.sh && tail -f $CATALINA_HOME/logs/catalina.out
