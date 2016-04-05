@@ -30,7 +30,6 @@ ENV MAVEN_HOME $ENV_PATH/maven
 ENV MAVEN_URL http://apache.claz.org/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
 RUN cd /tmp && mkdir maven && cd maven &&  curl -L $MAVEN_URL | tar -xz
 RUN mv /tmp/maven/* $MAVEN_HOME
-ENV PATH $PATH:$MAVEN_HOME/bin
 
 # Deploy.sh
 ADD deploy.sh $ENV_PATH/bin/deploy.sh
