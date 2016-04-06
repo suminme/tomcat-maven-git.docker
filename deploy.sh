@@ -19,7 +19,7 @@ fi
 echo "JAVA_OPTS=\"$JAVA_OPTS\"" >> $CATALINA_HOME/bin/setenv.sh
 
 # Git clone or update
-if [ ! -d $CODE_PATH ];
+if [ ! -d $CODE_PATH/.git ];
 then
 git clone $1 $CODE_PATH
 else
