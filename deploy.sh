@@ -39,5 +39,4 @@ cp $CODE_PATH/target/*.war $CATALINA_HOME/webapps
 mv $CATALINA_HOME/webapps/*.war $CATALINA_HOME/webapps/ROOT.war
 
 # Start tomcat
-rm -rf $CATALINA_HOME/temp/* && rm -rf $CATALINA_HOME/work/* && rm -rf $CATALINA_HOME/webapps/*
 $CATALINA_HOME/bin/startup.sh && tail -f $CATALINA_HOME/logs/catalina.out
