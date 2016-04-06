@@ -21,7 +21,11 @@ echo "JAVA_OPTS=\"$JAVA_OPTS\"" >> $CATALINA_HOME/bin/setenv.sh
 # Git clone or update
 if [ ! -d $CODE_PATH/.git ];
 then
-git clone $1 $CODE_PATH
+cd $CODE_PATH
+git clone --no-checkout $1 tmp/git
+mv tmp/git/.git .
+rmdir tmp/git
+git reset --hard HEAD
 else
 cd $CODE_PATH && git pull origin master
 fi
