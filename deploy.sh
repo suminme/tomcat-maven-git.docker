@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export CODE_PATH="/opt/code"
+export SOURCE_PATH="/opt/deploy/source"
 
 # Check Git Repository
 if [ ! -n "$1" ];
@@ -19,23 +19,23 @@ fi
 echo "JAVA_OPTS=\"$JAVA_OPTS\"" >> $CATALINA_HOME/bin/setenv.sh
 
 # Git clone or update
-if [ ! -d $CODE_PATH/.git ];
+if [ ! -d $SOURCE_PATH/.git ];
 then
-cd $CODE_PATH
+cd $SOURCE_PATH
 git clone --no-checkout $1 tmp/git
 mv tmp/git/.git .
 rmdir tmp/git
 git reset --hard HEAD
 else
-cd $CODE_PATH && git pull origin master
+cd $SOURCE_PATH && git pull origin master
 fi
 
 # Clean tomcat
 rm -rf $CATALINA_HOME/temp/* && rm -rf $CATALINA_HOME/work/* && rm -rf $CATALINA_HOME/webapps/*
 
 # Compile & Deploy code
-cd $CODE_PATH && $MAVEN_HOME/bin/mvn clean package -Dmaven.test.skip=true
-cp $CODE_PATH/target/*.war $CATALINA_HOME/webapps
+cd $SOURCE_PATH && $MAVEN_HOME/bin/mvn clean package -Dmaven.test.skip=true
+cp $SOURCE_PATH/target/*.war $CATALINA_HOME/webapps
 mv $CATALINA_HOME/webapps/*.war $CATALINA_HOME/webapps/ROOT.war
 
 # Start tomcat
