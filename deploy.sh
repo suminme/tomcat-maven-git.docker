@@ -1,5 +1,6 @@
 #!/bin/sh
 
+export BUILD_PATH="/opt/deploy/build"
 export SOURCE_PATH="/opt/deploy/source"
 
 # Check Git Repository
@@ -31,12 +32,12 @@ cd $SOURCE_PATH && git pull origin master
 fi
 
 # Clean tomcat
-rm -rf $CATALINA_HOME/temp/* && rm -rf $CATALINA_HOME/work/* && rm -rf $CATALINA_HOME/webapps/*
+rm -rf $CATALINA_HOME/temp/* && rm -rf $CATALINA_HOME/work/* && rm -rf $CATALINA_HOME/webapps/* && rm -rf $BUILD_PATH/*
 
 # Compile & Deploy code
 cd $SOURCE_PATH && $MAVEN_HOME/bin/mvn clean package -Dmaven.test.skip=true
-cp $SOURCE_PATH/target/*.war $CATALINA_HOME/webapps
-mv $CATALINA_HOME/webapps/*.war $CATALINA_HOME/webapps/ROOT.war
+cp $SOURCE_PATH/target/*.war $BUILD_PATH/
+mv $BUILD_PATH/*.war $BUILD_PATH/ROOT.war
 
 # Start tomcat
 $CATALINA_HOME/bin/startup.sh && tail -f $CATALINA_HOME/logs/catalina.out
