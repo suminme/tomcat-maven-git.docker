@@ -21,7 +21,7 @@ RUN mv /tmp/jdk/* $JAVA_HOME
 
 # Install tomcat
 ENV CATALINA_HOME $ENV_PATH/tomcat
-ENV TOMCAT_URL http://apache.fayea.com/tomcat/tomcat-8/v8.5.4/bin/apache-tomcat-8.5.4.tar.gz
+ENV TOMCAT_URL http://apache.osuosl.org/tomcat/tomcat-8/v8.5.4/bin/apache-tomcat-8.5.4.tar.gz
 RUN cd /tmp && mkdir tomcat && cd tomcat &&  curl -L $TOMCAT_URL | tar -xz
 RUN mv /tmp/tomcat/* $CATALINA_HOME
 ADD /tomcat/server8.xml $CATALINA_HOME/conf/server.xml
