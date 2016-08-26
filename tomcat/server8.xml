@@ -24,9 +24,9 @@
         <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
                resourceName="UserDatabase"/>
       </Realm>
-      <Host name="localhost"  appBase="webapps" debug="0"
+      <Host name="localhost"  appBase="/opt/deploy/build" debug="0"
             unpackWARs="true"  autoDeploy="false">
-	        <Context path="" docBase="/opt/deploy/build"></Context>
+	   
       </Host>
     </Engine>
   </Service>
