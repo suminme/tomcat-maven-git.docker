@@ -1,6 +1,11 @@
 #!/bin/sh
-export BUILD_PATH="/opt/deploy/build"
-export SOURCE_PATH="/opt/deploy/source"
+export DEPLOY_PATH="/opt/deploy"
+
+# Check build dir
+if [ ! -d $DEPLOY_PATH/build ];
+then
+cd $DEPLOY_PATH && mkdir build
+fi
 
 # Check Git Repository
 if [ ! -n "$1" ];
@@ -19,30 +24,24 @@ fi
 echo "JAVA_OPTS=\"$JAVA_OPTS\"" >> $CATALINA_HOME/bin/setenv.sh
 
 # Git clone or update
-if [ ! -d $SOURCE_PATH/.git ];
+if [ ! -d $DEPLOY_PATH/source/.git ];
 then
-cd $SOURCE_PATH
+cd $DEPLOY_PATH/source
 git clone --no-checkout $1 tmp/git
 mv tmp/git/.git .
 rmdir tmp/git
 git reset --hard HEAD
 else
-cd $SOURCE_PATH && git pull origin master
+cd $DEPLOY_PATH/source && git pull origin master
 fi
 
 # Clean tomcat
-rm -rf $CATALINA_HOME/temp/* && rm -rf $CATALINA_HOME/work/* && rm -rf $CATALINA_HOME/webapps/* && rm -rf $BUILD_PATH/*
+rm -rf $CATALINA_HOME/temp/* && rm -rf $CATALINA_HOME/work/* && rm -rf $CATALINA_HOME/webapps/* && rm -rf $DEPLOY_PATH/build/*
 
 # Compile & Deploy code
-cd $SOURCE_PATH && $MAVEN_HOME/bin/mvn clean package -Dmaven.test.skip=true
-
-if [ ! -d $BUILD_PATH/build ];
-then
-cd $BUILD_PATH && mkdir build
-fi
-
-cp $SOURCE_PATH/target/*.war $BUILD_PATH/
-mv $BUILD_PATH/*.war $BUILD_PATH/ROOT.war
+cd $DEPLOY_PATH/source && $MAVEN_HOME/bin/mvn clean package -Dmaven.test.skip=true
+cp $DEPLOY_PATH/source/target/*.war $DEPLOY_PATH/build/
+mv $DEPLOY_PATH/build/*.war $DEPLOY_PATH/build/ROOT.war
 
 # Start tomcat
 $CATALINA_HOME/bin/startup.sh && tail -f $CATALINA_HOME/logs/catalina.out
