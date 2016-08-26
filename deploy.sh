@@ -1,5 +1,4 @@
 #!/bin/sh
-
 export BUILD_PATH="/opt/deploy/build"
 export SOURCE_PATH="/opt/deploy/source"
 
@@ -36,6 +35,12 @@ rm -rf $CATALINA_HOME/temp/* && rm -rf $CATALINA_HOME/work/* && rm -rf $CATALINA
 
 # Compile & Deploy code
 cd $SOURCE_PATH && $MAVEN_HOME/bin/mvn clean package -Dmaven.test.skip=true
+
+if [ ! -d $BUILD_PATH/build ];
+then
+cd $BUILD_PATH && mkdir build
+fi
+
 cp $SOURCE_PATH/target/*.war $BUILD_PATH/
 mv $BUILD_PATH/*.war $BUILD_PATH/ROOT.war
 
