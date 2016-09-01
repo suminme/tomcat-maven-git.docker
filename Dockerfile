@@ -28,7 +28,7 @@ ADD /tomcat/server8.xml $CATALINA_HOME/conf/server.xml
 
 # Install maven
 ENV MAVEN_HOME $ENV_PATH/maven
-ENV MAVEN_URL http://apache.claz.org/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+ENV MAVEN_URL http://mirrors.cnnic.cn/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
 RUN cd /tmp && mkdir maven && cd maven &&  curl -L $MAVEN_URL | tar -xz
 RUN mv /tmp/maven/* $MAVEN_HOME
 
