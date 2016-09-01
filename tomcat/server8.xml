@@ -15,7 +15,7 @@
   <Service name="Catalina">
     <Executor name="tomcatThreadPool" namePrefix="catalina-exec-"
         maxThreads="300" minSpareThreads="4"/>
-    <Connector executor="tomcatThreadPool" port="8080" 
+    <Connector executor="tomcatThreadPool" port="80" 
 	protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8043"
 		URIEncoding="UTF-8" enableLookups="false" />
     <Connector port="8009" protocol="AJP/1.3" redirectPort="8043" />
