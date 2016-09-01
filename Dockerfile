@@ -33,8 +33,5 @@ RUN cd /tmp && mkdir maven && cd maven &&  curl -L $MAVEN_URL | tar -xz
 RUN mv /tmp/maven/* $MAVEN_HOME
 
 # Deploy.sh
-ADD deploy.sh $ENV_PATH/bin/deploy.sh
-RUN chmod 777 $ENV_PATH/bin/*.sh
-
-# Expose ports
-EXPOSE 8080
+ADD deploy.sh /deploy.sh
+RUN chmod 777 /*.sh
