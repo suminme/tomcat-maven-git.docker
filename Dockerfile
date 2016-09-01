@@ -1,5 +1,5 @@
 # Container
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 # Author
 MAINTAINER SUMIN "dev@sumin.me"
