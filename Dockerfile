@@ -35,3 +35,6 @@ RUN mv /tmp/maven/* $MAVEN_HOME
 # Deploy.sh
 ADD deploy.sh /deploy.sh
 RUN chmod 777 /*.sh
+
+# ENTRYPOINT
+ENTRYPOINT ["/deploy.sh"]
